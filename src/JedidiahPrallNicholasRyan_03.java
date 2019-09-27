@@ -30,4 +30,39 @@ public class JedidiahPrallNicholasRyan_03 {
    
    
 } // End Main
+
+//*****************************************************************************
+
+/* Methods will follow below. Methods will call for filling lists and 
+organizing data, and finally printing the data to an output file.
+*/
+
+//*****************************************************************************
+
+public static void processInput () throws IllegalArgumentException {
+
+}// End processInput
+
+//*****************************************************************************
+
+public static void processStudentData (String[] info) throws IllegalArgumentException {
+
+}// End processStudentData 
+
+//*****************************************************************************
+
+public static void processGradeItemData (String[] info) throws 
+                                         IllegalArgumentException {
+
+}// End processGradeItemData
+
+//*****************************************************************************
+
+public static void generateReport () {
+
+
+}// End generateReport
+
+
+} // End JedidiahPrallNicholasRyan_03
    

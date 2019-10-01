@@ -6,12 +6,42 @@ import java.util.Scanner;
  * @author 
  *
  */
+ 
+
+
+
 public class FirstnameLastName_03 {
 	
+   String xx = FileNumber.getFileNumber(args, "from user");
 	private static List listOfStudents;
 	private static List listOfGradeItems;
-	private static final String INPUT_FILE = null;
-	private static final String OUTPUT_FILE = null;
+	private static final String INPUT_FILE = "Project_03_Input" + xx +".txt";
+	private static final String OUTPUT_FILE = "Project_03_Output.txt";
+   
+   
+   //FileWriter outputDataFile = new FileWriter(OUTPUT_FILE);
+   //PrintWriter outputFile = new PrintWriter(outputDataFile);
+   
+   
+   /*
+  
+   try {
+      Scanner fileScan =new Scanner(INPUT_FILE);
+      if (fileScan.hasNextLine() == true) {
+         nextLine = fileScan.nextString();
+         String[] check = check.split("," , 10);
+         
+         if (check[0].equals("Student")){
+            processStudentData(nextLine, lineIndex);
+         }// End if    
+      } // End if    
+   } catch (FileNotFoundException e) {
+			System.err.println("File " + INPUT_FILENAME + " not found.\n" + e);
+      }
+            
+   
+   
+   */
 	
 	/**
 	 * TODO:

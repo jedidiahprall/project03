@@ -87,28 +87,44 @@ public class FirstnameLastName_03 {
 	public static void processStudentData(String[] info, int line) {
       boolean unique = false;
       
-      if (info[1].contains("ADD")) {
+      
 			try {
+            if (info[1].equals("ADD")) {
 				Student student = new Student(info[2],info[3],info[4],info[5]);
             unique = List.contains(student);
                if (unique == true) {  
-                  List.add (Student);
+                  List.add (student);
                } else {
                   System.out.println ("Student information in this entry " +
                                       "contains duplicate information." +
                                       "\n Unable to process");
                }
+            generateReport(student); 
             
-            
-				
+         }
+         if (info[1].equals("DEL")) {
+            Student student = new Student(info[2],info[3],info[4],info[5]);
+            unique = List.contains(student);
+               if (unique == true) {  
+                  List.remove (student);
+               } else {
+                  System.out.println ("Student information in this entry " +
+                                      "contains duplicate information." +
+                                      "\n Unable to process");
+         
+               }
+         } else {
+			  System.err.println("Second entry in line, " + info[1] +
+                              " does not match either ADD or DEL." +
+                              "\n Unable to process data");          
+			  }
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			} // End try / catch
-		} else {
-			System.err.println("\'ADD\' token not found, skipping line " + line);
+		
 		
 	}
-   }
+   
 	/**
 	 * TODO:
 	 * Does the following:
@@ -127,18 +143,44 @@ public class FirstnameLastName_03 {
 	 *   the token should be. 
 	 */
 	public static void processGradeItemData(String[] info, int line) {
-         if (info[1].contains("ADD")) {
+         boolean unique = false;
+      
+      
 			try {
-				GradeItem gradeItem = new GradeItem(info[3],info[2],info[5],info[6],
-										   info[4],info[7],info[8]);
-				
+            if (info[1].equals("ADD")) {
+				GradeItem gradeitem = new GradeItem(info[2],info[3],info[4],info[5]);
+            unique = List.contains(gradeitem);
+               if (unique == true) {  
+                  List.add (gradeitem);
+               } else {
+                  System.out.println ("Grade Item information in this entry " +
+                                      "contains duplicate information." +
+                                      "\n Unable to process");
+               }
+            generateReport(gradeitem); 
+            
+         }
+         if (info[1].equals("DEL")) {
+            radeItem gradeitem = new GradeItem(info[2],info[3],info[4],info[5]);
+            unique = List.contains(gradeitem);
+               if (unique == true) {  
+                  List.remove (gradeitem);
+               } else {
+                  System.out.println ("Student information in this entry " +
+                                      "contains duplicate information." +
+                                      "\n Unable to process");
+         
+               }
+         } else {
+			  System.err.println("Second entry in line, " + info[1] +
+                              " does not match either ADD or DEL." +
+                              "\n Unable to process data");          
+			  }
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
-			} // End try / catch 
-		} else {
-			System.err.println("\'ADD\' token not found, skipping line " + line);
+			} // End try / catch
 		
-	}
+		
    }
 	/**
 	 * TODO:

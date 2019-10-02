@@ -12,36 +12,17 @@ import java.util.Scanner;
 
 public class FirstnameLastName_03 {
 	
-   String xx = FileNumber.getFileNumber(args, "from user");
+   
 	private static List listOfStudents;
 	private static List listOfGradeItems;
-	private static final String INPUT_FILE = "Project_03_Input" + xx +".txt";
-	private static final String OUTPUT_FILE = "Project_03_Output.txt";
+	private static final String INPUT_FILE = null;
+	private static final String OUTPUT_FILE = null;
+   
    
    
    //FileWriter outputDataFile = new FileWriter(OUTPUT_FILE);
    //PrintWriter outputFile = new PrintWriter(outputDataFile);
    
-   
-   /*
-  
-   try {
-      Scanner fileScan =new Scanner(INPUT_FILE);
-      if (fileScan.hasNextLine() == true) {
-         nextLine = fileScan.nextString();
-         String[] check = check.split("," , 10);
-         
-         if (check[0].equals("Student")){
-            processStudentData(nextLine, lineIndex);
-         }// End if    
-      } // End if    
-   } catch (FileNotFoundException e) {
-			System.err.println("File " + INPUT_FILENAME + " not found.\n" + e);
-      }
-            
-   
-   
-   */
 	
 	/**
 	 * TODO:
@@ -70,10 +51,10 @@ public class FirstnameLastName_03 {
 				workingLine = fileReader.nextLine().split(",");
 				
 				if (workingLine[0].equals("STUDENT")) {
-					processStudentData(workingLine);
+					processStudentData(workingLine, lineNum);
 					
 				} else if (workingLine[0].equals("GRADE ITEM")) {
-					processGradeItemData(workingLine);
+					processGradeItemData(workingLine, lineNum);
 					
 				} else {
 					System.err.println("\'STUDENT\' or \'GRADE ITEM\' token not found."
@@ -103,9 +84,31 @@ public class FirstnameLastName_03 {
 	 * - If ADD or DEL are not found, write an error message that states it, showing the second field where 
 	 *   the token should be. 
 	 */
-	public static void processStudentData(String[] info) {
+	public static void processStudentData(String[] info, int line) {
+      boolean unique = false;
+      
+      if (info[1].contains("ADD")) {
+			try {
+				Student student = new Student(info[2],info[3],info[4],info[5]);
+            unique = List.contains(student);
+               if (unique == true) {  
+                  List.add (Student);
+               } else {
+                  System.out.println ("Student information in this entry " +
+                                      "contains duplicate information." +
+                                      "\n Unable to process");
+               }
+            
+            
+				
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			} // End try / catch
+		} else {
+			System.err.println("\'ADD\' token not found, skipping line " + line);
 		
 	}
+   }
 	/**
 	 * TODO:
 	 * Does the following:
@@ -123,9 +126,20 @@ public class FirstnameLastName_03 {
 	 * - If ADD or DEL are not found, write an error message that states it, showing the second field where 
 	 *   the token should be. 
 	 */
-	public static void processGradeItemData(String[] info) {
+	public static void processGradeItemData(String[] info, int line) {
+         if (info[1].contains("ADD")) {
+			try {
+				GradeItem gradeItem = new GradeItem(info[3],info[2],info[5],info[6],
+										   info[4],info[7],info[8]);
+				
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			} // End try / catch 
+		} else {
+			System.err.println("\'ADD\' token not found, skipping line " + line);
 		
 	}
+   }
 	/**
 	 * TODO:
 	 * Does the following

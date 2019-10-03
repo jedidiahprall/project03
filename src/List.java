@@ -38,13 +38,13 @@ public class List<T> implements MyCollectionInterface<Object> {
 			} // End if
 			index++;
 		} // End for
-		return false;
+		return canAdd;
 	} // End add
 
 	/**
 	 * Removes the first non-null item in the list.
 	 *  
-	 * @return true if successful, false if not
+	 * @return the removed item, null if the item was not removed. 
 	 */
 	public Object remove() {
 		Object removedObject = null;
@@ -73,14 +73,14 @@ public class List<T> implements MyCollectionInterface<Object> {
 		int index = 0;
 	
 		for (Object item : this.objectList) {
-			if (item == anEntry) {
+			if (item != null && item.equals(anEntry)) {
 				this.objectList[index] = null;
 				canRemove = true;
 				break;
 			} // End if
 			index++;
 		} // End for
-		return false;
+		return canRemove;
 	} // End remove
 
 	/**
@@ -143,7 +143,7 @@ public class List<T> implements MyCollectionInterface<Object> {
 		boolean inArray = false;
 		
 		for (Object item : this.objectList) {
-			if (item == anEntry) {
+			if (item != null && item.equals(anEntry)){
 				inArray = true;
 				break;
 			} // End if
@@ -177,4 +177,13 @@ public class List<T> implements MyCollectionInterface<Object> {
 			return returnArray;	
 		} // End else
 	} // End toArray
+	
+	/**
+	 * Gets an item at a specified index
+	 */
+	public Object get(int index) {
+		assert index < SIZE_LIMIT;
+		return this.objectList[index];
+		
+	}
 } // End list

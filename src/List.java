@@ -12,7 +12,6 @@ public class List<T> implements MyCollectionInterface<Object> {
 	/**
 	 * Default constructor. Instantiates both objectList and 
 	 * arraySize. 
-	 * 
 	 */
 	public List() {
 		this.objectList = new Object[SIZE_LIMIT];
@@ -73,13 +72,14 @@ public class List<T> implements MyCollectionInterface<Object> {
 		int index = 0;
 	
 		for (Object item : this.objectList) {
-			if (item != null && item.equals(anEntry)) {
+			if (item != null && item.toString().equals(anEntry.toString())) {
 				this.objectList[index] = null;
 				canRemove = true;
 				break;
 			} // End if
 			index++;
 		} // End for
+		
 		return canRemove;
 	} // End remove
 
@@ -160,7 +160,7 @@ public class List<T> implements MyCollectionInterface<Object> {
 	public Object[] toArray() {
 		this.getCurrentSize();	// Updates the current size of the list. 
 		Object[] returnArray;	// Object array to be returned. Stores no null values
-		int nonNullIndex = 0;	// Number of non null values in the array
+		int nonNullIndex = 0;	// Index of non null values in the array
 		
 		if (this.arraySize == 0) {
 			return null;

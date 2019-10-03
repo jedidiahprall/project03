@@ -10,7 +10,7 @@ public class FirstnameLastName_03 {
 	
 	private static List<Student> listOfStudents;		// List of Student objects
 	private static List<GradeItem> listOfGradeItems;	// List of GradeItem objects
-	private static String INPUT_FILE = "Input.txt";  
+	private static String INPUT_FILE = "Input.txt";  	// Input file
 	private static final String OUTPUT_FILE = null; 
 	
 	/**
@@ -23,7 +23,6 @@ public class FirstnameLastName_03 {
 		String[] workingLine; // Array which holds information, split into an array at the ',' character.
 		
 		try {
-			
 			file = new File(INPUT_FILE);
 			fileReader = new Scanner(file);
 			
@@ -143,10 +142,14 @@ public class FirstnameLastName_03 {
 									info[6], info[2], info[7], info[8]);
 				
 				 if (!listOfGradeItems.remove(newGradeItem)) {
+					 System.err.println("Grade item \'" + newGradeItem.getGradeItemId()
+						+ "\' with Student ID \'" + newGradeItem.getStudentId()
+						+ "\' cannot be deleted.");
 						
-						System.err.println("Grade item \'" + newGradeItem.getGradeItemId()
-							+ "\' with Student ID \'" + newGradeItem.getStudentId()
-							+ "\' cannot be deleted.");
+				 } else {
+					 System.out.println("Grade item \'" + newGradeItem.getGradeItemId()
+						+ "\' with Student ID \'" + newGradeItem.getStudentId()
+						+ "\' was deleted.");
 				 } // End if
 				
 			} catch (Exception e) {
@@ -159,6 +162,25 @@ public class FirstnameLastName_03 {
 		} // End if / else
 	}
 	/**
+	 * Helper method for the generateReport method which searches a gradeItem ArrayList to look for 
+	 * all objects with a similar student ID. Once those values are found, it appends them to another 
+	 * array which is then returned when no more 
+	 * 
+	 * @param id, Student ID used to search the grade Item array for a matching value.
+	 * @return ArrayList<GradeItem> : list of grade item objects which match the student ID
+	 */
+	public static ArrayList<GradeItem> getMatchingStudentId(String id, ArrayList<GradeItem> gradeItem) {
+		ArrayList<GradeItem> results = new ArrayList<GradeItem>();
+		
+		for (GradeItem item : gradeItem) {
+			if (item.getStudentId().equals(id)) {
+				results.add(item);
+			}
+		}
+		
+		return results;
+	}
+	/**
 	 * TODO:
 	 * Does the following
 	 * - Calls the TODO toArray method in the list class to get a list of Student objects
@@ -169,24 +191,23 @@ public class FirstnameLastName_03 {
 		ArrayList<Student> studentArray = new ArrayList<Student>();
 		ArrayList<GradeItem> gradeItemArray = new ArrayList<GradeItem>();
 		
-		for (Object std : listOfStudents.toArray()) {
-			if (std != null) {
-				Student student = (Student) std;
+		for (Object obj : listOfStudents.toArray()) {
+			if (obj != null) {
+				Student student = (Student) obj;
 				studentArray.add(student);
 			}
 		}
 		
-		for (Object gitm : listOfGradeItems.toArray()) {
-			if (gitm != null) {
-				GradeItem gradeitem = (GradeItem) gitm;
-				gradeItemArray.add(gradeitem);
+		for (Object obj : listOfGradeItems.toArray()) {
+			if (obj != null) {
+				GradeItem gradeItem = (GradeItem) obj;
+				gradeItemArray.add(gradeItem);
 			}
 		}
 		
 		double averageScore;
 		int sumOfMaxScores; 
 		int sumOfAverageScores;
-		
 		
 		
 		
@@ -198,6 +219,6 @@ public class FirstnameLastName_03 {
 		
 		processInput();
 
-		//generateReport();
+		generateReport();
 	}
 } // End class

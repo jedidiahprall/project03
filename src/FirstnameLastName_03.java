@@ -85,21 +85,21 @@ public class FirstnameLastName_03 {
 	 *   the token should be. 
 	 */
 	public static void processStudentData(String[] info, int line) {
-      boolean unique = false;
+      boolean unique = true;
       
       
 			try {
             if (info[1].equals("ADD")) {
 				Student student = new Student(info[2],info[3],info[4],info[5]);
             unique = List.contains(student);
-               if (unique == true) {  
+               if (unique == false) {  
                   List.add (student);
                } else {
                   System.out.println ("Student information in this entry " +
                                       "contains duplicate information." +
                                       "\n Unable to process");
                }
-            generateReport(student); 
+             
             
          }
          if (info[1].equals("DEL")) {
@@ -143,30 +143,30 @@ public class FirstnameLastName_03 {
 	 *   the token should be. 
 	 */
 	public static void processGradeItemData(String[] info, int line) {
-         boolean unique = false;
+         boolean unique = true;
       
       
 			try {
             if (info[1].equals("ADD")) {
-				GradeItem gradeitem = new GradeItem(info[2],info[3],info[4],info[5]);
+				GradeItem gradeitem = new GradeItem(info[2],info[3],info[4],info[5],info[6],info[7],info[8]);
             unique = List.contains(gradeitem);
-               if (unique == true) {  
+               if (unique == false) {  
                   List.add (gradeitem);
                } else {
                   System.out.println ("Grade Item information in this entry " +
                                       "contains duplicate information." +
                                       "\n Unable to process");
                }
-            generateReport(gradeitem); 
+             
             
          }
          if (info[1].equals("DEL")) {
-            radeItem gradeitem = new GradeItem(info[2],info[3],info[4],info[5]);
+            GradeItem gradeitem = new GradeItem(info[2],info[3],info[4],info[5],info[6],info[7],info[8]);
             unique = List.contains(gradeitem);
                if (unique == true) {  
                   List.remove (gradeitem);
                } else {
-                  System.out.println ("Student information in this entry " +
+                  System.out.println ("Grade Item information in this entry " +
                                       "contains duplicate information." +
                                       "\n Unable to process");
          
@@ -189,8 +189,14 @@ public class FirstnameLastName_03 {
 	 * - Calls the TODO toArray method in the list class to get a list of GradeItem objects. 
 	 * - Generates a report which is writeen to an output file, Project_03_Outputxx.txt
 	 */
-	public static void generateReport(String [] item) {
-		
+	public static void generateReport(Array [] object) {
+	   listOfStudents = List.toArray();
+		listOfGradeItems = List.toArray();
+      
+      
+      
+      
+
 	}
 	
 	/**
@@ -202,10 +208,10 @@ public class FirstnameLastName_03 {
 	 */
 	public static void main(String[] args) {
 		listOfStudents = new List('S');
-		listOfGradeItems = new List('G');
+		listOfGradeItems = new List('S');
 		
 		processInput();
 
-		generateReport();
+		generateReport(listOfStudents, listOfGradeItems);
 	}
 } // End class

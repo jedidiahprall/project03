@@ -189,7 +189,7 @@ public class FirstnameLastName_03 {
 	 * - Calls the TODO toArray method in the list class to get a list of GradeItem objects. 
 	 * - Generates a report which is writeen to an output file, Project_03_Outputxx.txt
 	 */
-	public static void generateReport() {
+	public static void generateReport(String [] item) {
 		
 	}
 	

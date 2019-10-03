@@ -1,8 +1,8 @@
 import java.io.File;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-
+import java.util.ArrayList;
+import java.io.*;
+import java.text.DecimalFormat;
 /* 
    JedidiahPrallNicholasRyan_03.java 
    
@@ -31,28 +31,21 @@ import java.io.PrintWriter;
           (May 8, 1884 - December 26, 1972) 
       
 */
-public class WorkingFile {
+public class FirstnameLastName_03 {
 	
 	private static List<Student> listOfStudents;		// List of Student objects
 	private static List<GradeItem> listOfGradeItems;	// List of GradeItem objects
-	private static String xx = "01";
-   private static String INPUT_FILE = "Project_03_Input"+xx+".txt";  
-	private static String OUTPUT_FILE = "Project_03_Output01"+xx+".txt";
-   
+	 
+	 
 	
-   
-	/*
-       
+	/**
+	 * 
 	 */
-	public static void processInput() {
+	public static void processInput(String INPUT_FILE) {
 		int lineNum = 0; 	  // Indicates which line the reader is on
 		File file;			  // Declares a file
 		Scanner fileReader;	  // Declares an input stream
-		String[] workingLine; 
-      /*
-         Array which holds information, 
-         split into an array at the ',' character.
-      */
+		String[] workingLine; // Array which holds information, split into an array at the ',' character.
 		
 		try {
 			
@@ -96,7 +89,10 @@ public class WorkingFile {
 						
 						System.err.println("Student \'" + newStudent.getStudentId()
 								+ "\' could not be added to the list. Skipping this entry.");
-					} // End if
+					} else {
+						System.out.println("Student \'" + newStudent.getStudentId()
+						+ "\' was added to the list.");
+					} // End if / else
 					
 				} else {
 					System.err.println("Student \'" + newStudent.getStudentId()
@@ -116,6 +112,9 @@ public class WorkingFile {
 					
 					System.err.println("Student \'" + newStudent.getStudentId()
 							+ "\' could not be removed from the list. Skipping this entry.");
+				} else {
+					System.out.println("Student \'" + newStudent.getStudentId()
+					+ "\' was removed from the list.");
 				} // End if
 				
 			} catch (Exception e) {
@@ -147,6 +146,10 @@ public class WorkingFile {
 								+ "\' with Student ID \'" + newGradeItem.getStudentId() 
 								+ "\' could not be added to the list. Skipping this entry.");
 						
+					} else {
+						System.out.println("Grade item \'" + newGradeItem.getGradeItemId()
+						+ "\' with Student ID \'" + newGradeItem.getStudentId() 
+						+ "\' was added to the list.");
 					} // End if
 					
 				} else {
@@ -207,37 +210,108 @@ public class WorkingFile {
 	 * - Generates a report which is written to an output file, Project_03_Outputxx.txt
 	 */
 	public static void generateReport(PrintWriter output) {
-		Object[] studentArray = listOfStudents.toArray();
-		Object[] gradeItemArray = listOfGradeItems.toArray();
+      
+            
+      
+		ArrayList<Student> studentArray = new ArrayList<Student>();
+		ArrayList<GradeItem> gradeItemArray = new ArrayList<GradeItem>();
+		
+		for (Object std : listOfStudents.toArray()) {
+			if (std != null) {
+				Student student = (Student) std;
+				studentArray.add(student);
+			}
+		}
+		
+		for (Object gitm : listOfGradeItems.toArray()) {
+			if (gitm != null) {
+				GradeItem gradeitem = (GradeItem) gitm;
+				gradeItemArray.add(gradeitem);
+			}
+		}
+      
+      
 		
 		double averageScore;
 		int sumOfMaxScores; 
 		int sumOfAverageScores;
-      String header = "This is the header.";
-      System.out.println (header);
-      output.print (header);
       
       
+      String topInfo = "\n\t\t\t\t\t\t\t Student Grade Report"+
+                       "\nStudent ID\tFirst Name\tLast Name" +
+                       "\tEmail Address";
+      String infoUnderline = "__________\t__________\t"+
+                             "_________\t_____________";
+     // String ID
+      String gradeHdr = "Grade Items";
+      //String assignment = "\t" + studentArray.get(1).getStudentId()+ "\tProject 02\t\t70\t\t65";
+      //TODO Adjust separator length
+      String separator = "=============================================="+
+                         "======================================";
       
+      
+            
+      System.out.println (topInfo);
+      System.out.println (infoUnderline);
+      // Below Student Information serves only as place Holder to aid formatting
+      System.out.println(ToolkitBasic.padString(studentArray.get(1).getStudentId(),12,""," ")+
+                        ToolkitBasic.padString(studentArray.get(1).getStudentFirstName(),12,""," ")+
+                        ToolkitBasic.padString(studentArray.get(1).getStudentLastName(),12,""," ")+
+                        studentArray.get(1).getEmailAddress());
+      // TODO Student info displayed here 
+      System.out.println (gradeHdr);
+      System.out.println (ToolkitBasic.rightPad(gradeItemArray.get(1).getGradeItemId(),8," ")+
+                          ToolkitBasic.padString(gradeItemArray.get(1).getCourseId(),10,""," ")+
+                          ToolkitBasic.padString(gradeItemArray.get(1).getItemType(),8,""," ")+
+                          ToolkitBasic.padString(gradeItemArray.get(1).getDate(),10,""," ")+
+                          ToolkitBasic.rightPad(gradeItemArray.get(1).getMaxScore(),10," ")+ 
+                          gradeItemArray.get(1).getActualScore());
+      // TODO Grade Item info Displayed here
+      System.out.println (separator);
+      
+      output.println (topInfo);
+      output.println (infoUnderline);
+      // Below Student Information serves only as place Holder to aid formatting
+      output.println(ToolkitBasic.padString(studentArray.get(1).getStudentId(),16,""," ")+
+                     ToolkitBasic.padString(studentArray.get(1).getStudentFirstName(),16,""," ")+
+                     ToolkitBasic.padString(studentArray.get(1).getStudentLastName(),16,""," ")+
+                     studentArray.get(1).getEmailAddress());
+      // TODO Student info displayed here 
+      output.println (gradeHdr);
+      output.println (ToolkitBasic.rightPad(gradeItemArray.get(1).getGradeItemId(),8," ")+
+                      ToolkitBasic.padString(gradeItemArray.get(1).getCourseId(),10,""," ")+
+                      ToolkitBasic.padString(gradeItemArray.get(1).getItemType(),8,""," ")+
+                      ToolkitBasic.padString(gradeItemArray.get(1).getDate(),10,""," ")+
+                      ToolkitBasic.rightPad(gradeItemArray.get(1).getMaxScore(),10," ")+ 
+                      gradeItemArray.get(1).getActualScore());
+      // TODO Grade Item info Displayed here
+      output.println (separator);
+      
+
+      
+      
+       
+      
+		
+		
 		
 		
 	} // End generateReport
-	
-	public static void main(String[] args) {
+   	
+	public static void main(String[] args) throws IOException {
 		listOfStudents = new List<Student>();
 		listOfGradeItems = new List<GradeItem>();
       String xx = FileNumber.getFileNumber(args, "from user");
-      
-      //private static String INPUT_FILE = "Project_03_Input"+xx+".txt";  
-	   //private static String OUTPUT_FILE = "Project_03_Output01"+xx+".txt";
-		
+      final String INPUT_FILE = "Project_03_Input"+xx+".txt";
+      final String OUTPUT_FILE = "Project_03_Output"+xx+".txt";
       FileWriter outputDataFile = new FileWriter(OUTPUT_FILE);
       PrintWriter outputFile = new PrintWriter(outputDataFile);
 		
-      processInput();
-		System.out.println(listOfGradeItems.getCurrentSize());
-		System.out.println(listOfStudents.getCurrentSize());
-				
-		generateReport(PrintWriter);
+      
+		processInput(INPUT_FILE);
+
+		generateReport(outputFile);
+      
+      outputFile.close();
 	}
 } // End class

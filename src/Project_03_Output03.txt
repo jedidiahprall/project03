@@ -1,0 +1,8 @@
+
+							 Student Grade Report
+Student ID	First Name	Last Name	Email Address
+__________	__________	_________	_____________
+9000344425      Piper           Kenricks        pkenricks22@msudenver.edu
+Grade Items
+ 2      11324     Quiz    20191003   70       66
+====================================================================================

@@ -1,0 +1,8 @@
+
+							 Student Grade Report
+Student ID	First Name	Last Name	Email Address
+__________	__________	_________	_____________
+900123458       Meredith        Smalls          meredithsmalls@msudenver.edu
+Grade Items
+ 3      23456     HW      20190114   100      95
+====================================================================================
